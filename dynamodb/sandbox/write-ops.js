@@ -103,4 +103,4 @@ const batchWriteCommand = async () => {
 // putCommand();
 // updateCommand();
 // deleteCommand();
-batchWriteCommand();
+// batchWriteCommand();
