@@ -9,19 +9,19 @@ const {
 
 const client = new DynamoDBClient({ region: 'sa-east-1' });
 
-list = async (event) => {
+listTable = async () => {
   const command = new ListTablesCommand({});
   const { TableNames } = await client.send(command);
   console.log(TableNames);
 };
 
-describe = async (event) => {
+describeTable = async () => {
   const command = new DescribeTableCommand({ TableName: 'td_notes' });
   const { Table } = await client.send(command);
   console.log(Table.ItemCount);
 };
 
-createTable = async (event) => {
+createTable = async () => {
   const command = new CreateTableCommand({
     TableName: 'td_notes_ondemand',
     AttributeDefinitions: [
@@ -38,7 +38,7 @@ createTable = async (event) => {
   console.log(TableDescription);
 };
 
-updateTable = async (event) => {
+updateTable = async () => {
   const command = new UpdateTableCommand({
     TableName: 'td_notes_ondemand',
     ProvisionedThroughput: {
@@ -50,7 +50,7 @@ updateTable = async (event) => {
   console.log(TableDescription);
 };
 
-deleteTable = async (event) => {
+deleteTable = async () => {
   const command = new DeleteTableCommand({
     TableName: 'td_notes_ondemand',
   });
@@ -58,4 +58,8 @@ deleteTable = async (event) => {
   console.log(TableDescription);
 };
 
-deleteTable();
+// listTable();
+// describeTable();
+// createTable();
+// updateTable();
+// deleteTable();
