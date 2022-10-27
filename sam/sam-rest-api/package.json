@@ -1,5 +1,5 @@
 {
-  "name": "serverless-architecture",
+  "name": "sam-rest-api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.1241.0"
+    "@aws-sdk/client-dynamodb": "^3.197.0",
+    "@aws-sdk/lib-dynamodb": "^3.197.0"
   }
 }
