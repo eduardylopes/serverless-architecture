@@ -1,11 +1,10 @@
 class ResponseModel {
-  constructor(data, statusCode) {
-    if (typeof data === 'string') {
-      this.body = JSON.stringify({ message });
-    }
-    if (typeof data === 'object') {
-      this.body = JSON.stringify(data);
-    }
+  constructor(statusCode, message, data) {
+    this.body = JSON.stringify({
+      statusCode,
+      message,
+      data,
+    });
     this.statusCode = statusCode;
   }
 }

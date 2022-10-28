@@ -44,7 +44,7 @@ Resources:
           Type: Api
           Properties:
             Path: /user/{userId}
-            Method: put
+            Method: post
 
   DeleteUser:
     Type: AWS::Serverless::Function
