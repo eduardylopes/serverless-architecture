@@ -1,0 +1,66 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: REST API using SAM
+Globals:
+  Function:
+    Runtime: nodejs16.x
+    Environment:
+      Variables:
+        TABLE_NAME:
+          Ref: Table
+    MemorySize: 128
+    Timeout: 5
+Resources:
+  Table:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      PrimaryKey:
+        Name: userId
+        Type: String
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+    Metadata:
+      SamResourceId: Table
+  GetUser:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: get.handler
+      Policies: AmazonDynamoDBReadOnlyAccess
+      Events:
+        GetUser:
+          Type: Api
+          Properties:
+            Path: /user/{userId}
+            Method: get
+      CodeUri: s3://eduardy-sam/c472250f2b732849a05af2d444edf2cc
+    Metadata:
+      SamResourceId: GetUser
+  PostUser:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: post.handler
+      Policies: AmazonDynamoDBFullAccess
+      Events:
+        GetUser:
+          Type: Api
+          Properties:
+            Path: /user/{userId}
+            Method: post
+      CodeUri: s3://eduardy-sam/c472250f2b732849a05af2d444edf2cc
+    Metadata:
+      SamResourceId: PostUser
+  DeleteUser:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: delete.handler
+      Policies: AmazonDynamoDBFullAccess
+      Events:
+        GetUser:
+          Type: Api
+          Properties:
+            Path: /user/{userId}
+            Method: delete
+      CodeUri: s3://eduardy-sam/c472250f2b732849a05af2d444edf2cc
+    Metadata:
+      SamResourceId: DeleteUser

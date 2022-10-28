@@ -1,8 +1,6 @@
 const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
-const {
-  PutItemCommand,
-  DynamoDBDocumentClient,
-} = require('@aws-sdk/lib-dynamodb');
+const { PutCommand, DynamoDBDocumentClient } = require('@aws-sdk/lib-dynamodb');
+const ResponseModel = require('./response-model');
 
 const client = new DynamoDBClient({ region: 'sa-east-1' });
 const ddbDocClient = DynamoDBDocumentClient.from(client);
@@ -21,17 +19,21 @@ exports.handler = async (event) => {
     website,
   };
 
-  const command = new PutItemCommand({
+  const command = new PutCommand({
     TableName: tableName,
     Item: item,
+    ConditionExpression: 'attribute_not_exists(#userId)',
+    ExpressionAttributeNames: {
+      '#userId': 'userId',
+    },
   });
 
-  await ddbDocClient.send(command);
-
-  return {
-    statusCode: 200,
-    body: JSON.stringify({
-      message: 'Data inserted/updated successfully.',
-    }),
-  };
+  try {
+    await ddbDocClient.send(command);
+    return new ResponseModel(201, 'User successfully created.');
+  } catch (e) {
+    if (e.name === 'ConditionalCheckFailedException') {
+      return new ResponseModel(403, 'User already exists.');
+    }
+  }
 };

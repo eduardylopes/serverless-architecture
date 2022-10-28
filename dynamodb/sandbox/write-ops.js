@@ -53,6 +53,7 @@ const deleteCommand = async () => {
         user_id: 'ee',
         timestamp: 30,
       },
+      ReturnValues: 'ALL_OLD',
     })
   );
 

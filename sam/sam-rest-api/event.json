@@ -1,0 +1,6 @@
+{
+  "pathParameters": {
+    "userId": "eduardy2222"
+  },
+  "body": "{\n    \"firstName\": \"Eduardy\",\n    \"lastName\": \"Lopes\",\n    \"email\": \"eduardylopes@gmail.com\",\n    \"website\": \"eduardylopes.dev\"\n  }"
+}

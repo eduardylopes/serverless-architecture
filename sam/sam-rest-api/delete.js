@@ -3,6 +3,7 @@ const {
   DeleteCommand,
   DynamoDBDocumentClient,
 } = require('@aws-sdk/lib-dynamodb');
+const ResponseModel = require('./response-model');
 
 const client = new DynamoDBClient({ region: 'sa-east-1' });
 const ddbDocClient = DynamoDBDocumentClient.from(client);
@@ -12,19 +13,17 @@ const tableName = process.env.TABLE_NAME;
 exports.handler = async (event) => {
   const { userId } = event.pathParameters;
 
-  const command = DeleteCommand({
+  const command = new DeleteCommand({
     TableName: tableName,
     Key: {
       userId,
     },
+    ReturnValues: 'ALL_OLD',
   });
 
-  await ddbDocClient.send(command);
+  const { Attributes } = await ddbDocClient.send(command);
 
-  return {
-    statusCode: 200,
-    body: JSON.stringify({
-      message: 'User deleted successfully.',
-    }),
-  };
+  if (!Attributes) return new ResponseModel(404, 'User not found.');
+
+  return new ResponseModel(204, 'User deleted successfully.');
 };
