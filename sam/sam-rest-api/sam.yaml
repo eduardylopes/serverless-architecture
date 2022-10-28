@@ -33,7 +33,7 @@ Resources:
           Properties:
             Path: /user/{userId}
             Method: get
-      CodeUri: s3://eduardy-sam/c556c9c4c16d6ff64bd6b3c00cba0403
+      CodeUri: s3://eduardy-sam/9c3aa4b89f6053378346e69a9f84eb5b
     Metadata:
       SamResourceId: GetUser
   PostUser:
@@ -47,7 +47,7 @@ Resources:
           Properties:
             Path: /user/{userId}
             Method: post
-      CodeUri: s3://eduardy-sam/c556c9c4c16d6ff64bd6b3c00cba0403
+      CodeUri: s3://eduardy-sam/9c3aa4b89f6053378346e69a9f84eb5b
     Metadata:
       SamResourceId: PostUser
   DeleteUser:
@@ -61,6 +61,6 @@ Resources:
           Properties:
             Path: /user/{userId}
             Method: delete
-      CodeUri: s3://eduardy-sam/c556c9c4c16d6ff64bd6b3c00cba0403
+      CodeUri: s3://eduardy-sam/9c3aa4b89f6053378346e69a9f84eb5b
     Metadata:
       SamResourceId: DeleteUser
