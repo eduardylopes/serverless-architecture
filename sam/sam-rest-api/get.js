@@ -21,5 +21,5 @@ exports.handler = async (event) => {
 
   if (!Item) return new ResponseModel(404, 'User not found');
 
-  return new ResponseModel(201, null, Item);
+  return new ResponseModel(201, 'User found', Item);
 };

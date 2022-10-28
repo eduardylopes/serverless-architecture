@@ -25,5 +25,5 @@ exports.handler = async (event) => {
 
   if (!Attributes) return new ResponseModel(404, 'User not found.');
 
-  return new ResponseModel(204, 'User deleted successfully.');
+  return new ResponseModel(201, 'User deleted successfully.');
 };
